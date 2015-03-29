@@ -11,11 +11,11 @@ import java.util.Scanner;
  */
 public class LoadImage {
 
-    public void load(){
+    public static void load(String fileName){
         boolean[][] newimage = null;
         try{
             java.util.regex.Pattern bit = java.util.regex.Pattern.compile("[01]");
-            Scanner f = new Scanner(new File(FileDialog.open()));
+            Scanner f = new Scanner(new File(fileName));
             if (!f.next().equals("P1")) System.out.println("Not a P1 PBM file" );
             String category = f.next().substring(1);
             int rows = f.nextInt();
