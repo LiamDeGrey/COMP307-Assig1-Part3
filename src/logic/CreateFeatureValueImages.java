@@ -17,9 +17,10 @@ public class CreateFeatureValueImages {
         int sum;
 
         for (boolean[][] image : images) {
-            featureValueImage = new int[features.length];
+            featureValueImage = new int[features.length+1];
+            featureValueImage[0] = 1;//Dummy feature
 
-            for (int i = 0 ; i < features.length; i++) {
+            for (int i = 1 ; i <= features.length; i++) {
                 feature = features[i];
                 sum = 0;
 
