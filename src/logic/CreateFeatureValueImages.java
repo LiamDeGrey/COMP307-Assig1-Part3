@@ -20,14 +20,14 @@ public class CreateFeatureValueImages {
             featureValueImage = new int[features.length+1];
             featureValueImage[0] = 1;//Dummy feature
 
-            for (int i = 1 ; i <= features.length; i++) {
+            for (int i = 0 ; i < features.length; i++) {
                 feature = features[i];
                 sum = 0;
 
                 for (int j = 0; j < 4; j++) {
                     sum += (image[feature.getColumnValue(j)][feature.getRowValue(j)] == feature.getSignValue(j))? 1 : 0;
                 }
-                featureValueImage[i] = (sum >= 3)? 1 : 0;
+                featureValueImage[i+1] = (sum >= 3)? 1 : 0;
             }
             featureValueImages.add(featureValueImage);
         }

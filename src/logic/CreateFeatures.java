@@ -28,7 +28,7 @@ public class CreateFeatures {
         return features;
     }
 
-    private static int randomInt(int max) {
-        return (int)(Math.random() * max);
+    private static int randomInt(int range) {
+        return (int)(Math.random() * range);
     }
 }

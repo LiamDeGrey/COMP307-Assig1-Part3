@@ -2,6 +2,7 @@ package main;
 
 import logic.CreateFeatureValueImages;
 import logic.CreateFeatures;
+import logic.CreateWeights;
 import objects.Feature;
 import logic.LoadImages;
 
@@ -40,12 +41,12 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<int[]> featureValueImages = findFeatureValueImages(args);
+        double[] weights;
 
-        for (int[] image : featureValueImages) {
-            System.out.println();
-            for (int value : image) {
-                System.out.print(value);
-            }
+        if (featureValueImages != null) {
+            weights = CreateWeights.create(featureValueImages.get(0).length);
+        } else {
+            System.out.println("There was an error creating the featureValueImages");
         }
     }
 }
