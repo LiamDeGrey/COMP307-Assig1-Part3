@@ -6,9 +6,11 @@ public class CreateWeights {
 
 	public static double[] create(int numberOfWeights) {
 		double[] weights = new double[numberOfWeights];
-		for (int i = 0; i < weights.length; i++) {
+		weights[0] = 1.0;
+		for (int i = 1; i < weights.length; i++) {
 			weights[i] = randomDouble(RANGE);
 		}
+
 		return weights;
 	}
 

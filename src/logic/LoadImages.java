@@ -22,7 +22,6 @@ public class LoadImages {
             while (f.hasNext()) {
                 if (!f.next().equals("P1")) System.out.println("Not a P1 PBM file" );
                 String category = f.next().substring(1);
-                System.out.println(category);
                 int rows = f.nextInt();
                 int cols = f.nextInt();
 
