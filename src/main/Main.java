@@ -4,6 +4,8 @@ import logic.CreateFeatureValueImages;
 import logic.CreateFeatures;
 import logic.CreateWeights;
 import objects.Feature;
+import objects.Image;
+import objects.Perceptron;
 import logic.LoadImages;
 
 import java.util.ArrayList;
@@ -14,10 +16,9 @@ import java.util.ArrayList;
 public class Main {
     private static final int NUMBERFEATURES = 50;
 
-    private static ArrayList<int[]> findFeatureValueImages(String[] args) {
-        ArrayList<boolean[][]> images = null;
+    private static ArrayList<Image> findImages(String[] args) {
+        ArrayList<Image> images = null;
         Feature[] features = null;
-        ArrayList<int[]> featureValueImages = null;
 
         if (args.length > 0) {
             images = LoadImages.load(args[0]);
@@ -26,27 +27,31 @@ public class Main {
         }
 
         if (images != null) {
-            features = CreateFeatures.create(NUMBERFEATURES, images.get(0).length-1, images.get(0)[0].length -1);
+            features = CreateFeatures.create(NUMBERFEATURES, images.get(0).getWidth()-1, images.get(0).getHeight()-1);
         } else {
             System.out.println("There was an error loading your images");
         }
 
         if (features != null) {
-            featureValueImages = CreateFeatureValueImages.create(features, images);
+            images = CreateFeatureValueImages.create(features, images);
         } else {
             System.out.println("There was an error creating the random features");
+            images = null;
         }
-        return featureValueImages;
+        return images;
     }
 
     public static void main(String[] args) {
-        ArrayList<int[]> featureValueImages = findFeatureValueImages(args);
+        ArrayList<Image> images = findImages(args);
         double[] weights;
 
-        if (featureValueImages != null) {
-            weights = CreateWeights.create(featureValueImages.get(0).length);
+        if (images != null) {
+        	new Perceptron(
+        			images,
+        			CreateWeights.create(images.get(0).getFeatureArray().length)
+        			);
         } else {
-            System.out.println("There was an error creating the featureValueImages");
+            System.out.println("There was an error creating the Images");
         }
     }
 }

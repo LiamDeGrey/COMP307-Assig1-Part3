@@ -1,6 +1,7 @@
 package logic;
 
 import objects.Feature;
+import objects.Image;
 
 import java.util.ArrayList;
 
@@ -9,28 +10,26 @@ import java.util.ArrayList;
  */
 public class CreateFeatureValueImages {
 
-    public static ArrayList<int[]> create(Feature[] features, ArrayList<boolean[][]> images) {
-        ArrayList<int[]> featureValueImages = new ArrayList<>();
-
-        int[] featureValueImage;
+    public static ArrayList<Image> create(Feature[] features, ArrayList<Image> images) {
+        int[] featureArray;
         Feature feature;
         int sum;
 
-        for (boolean[][] image : images) {
-            featureValueImage = new int[features.length+1];
-            featureValueImage[0] = 1;//Dummy feature
+        for (Image image : images) {
+            featureArray = new int[features.length+1];
+            featureArray[0] = 1;//Dummy feature
 
             for (int i = 0 ; i < features.length; i++) {
                 feature = features[i];
                 sum = 0;
 
                 for (int j = 0; j < 4; j++) {
-                    sum += (image[feature.getColumnValue(j)][feature.getRowValue(j)] == feature.getSignValue(j))? 1 : 0;
+                    sum += (image.getPixels()[feature.getColumnValue(j)][feature.getRowValue(j)] == feature.getSignValue(j))? 1 : 0;
                 }
-                featureValueImage[i+1] = (sum >= 3)? 1 : 0;
+                featureArray[i+1] = (sum >= 3)? 1 : 0;
             }
-            featureValueImages.add(featureValueImage);
+            image.addFeatureArray(featureArray);
         }
-        return featureValueImages;
+        return images;
     }
 }
